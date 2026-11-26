@@ -1,23 +1,8 @@
 # Class-activity-2
 
-Actividad en clase de Programación Web: dos aplicaciones en **React** dentro de un mismo proyecto.
+Actividad en clase de Programación Web en **React**: calculadora estándar tipo móvil.
 
-## Flujo
-
-```
-Login (Username, Password, Button)
-   └── Menú
-        ├── SUM        → Número 1, Número 2, Resultado y botón Sumar
-        └── Calculator → Calculadora estándar tipo móvil
-```
-
-## Reparto del trabajo
-
-| Parte | Archivo | Responsable |
-|-------|---------|-------------|
-| Login y menú | `src/pages/Login.jsx`, `src/pages/Menu.jsx` | Equipo |
-| Suma | `src/pages/Suma.jsx` | Compañero |
-| Calculadora | `src/pages/Calculadora.jsx`, `src/logic/calculadora.js` | Steven |
+> Esta rama contiene solo la calculadora. El login, el menú y la aplicación de suma se desarrollan en la rama `dev`.
 
 ## Calculadora
 
@@ -26,6 +11,8 @@ Login (Username, Password, Button)
 - Muestra error al dividir entre 0 o sacar raíz de un negativo
 - También funciona con el teclado: números, `+ - * /`, `Enter`, `Backspace`, `Esc`
 
+Archivos: `src/pages/Calculadora.jsx` (interfaz) y `src/logic/calculadora.js` (lógica).
+
 ## Ejecutar
 
 ```bash
@@ -33,4 +20,4 @@ npm install
 npm run dev
 ```
 
-Abrir la URL que muestra la terminal (por defecto http://localhost:5173). En el login se puede usar cualquier usuario y contraseña no vacíos.
+Abrir la URL que muestra la terminal (por defecto http://localhost:5173).
