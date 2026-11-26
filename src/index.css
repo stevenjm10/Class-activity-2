@@ -1,0 +1,118 @@
+* { box-sizing: border-box; margin: 0; }
+
+:root {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #f3f3f3;
+  background: #1c1c1c;
+}
+
+body { min-height: 100vh; }
+
+button { font: inherit; cursor: pointer; border: none; }
+
+/* ---------- Pantallas generales (login, menú, suma) ---------- */
+.pantalla {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.tarjeta {
+  width: min(100%, 360px);
+  background: #2b2b2b;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.tarjeta h1 { font-size: 1.5rem; text-align: center; margin-bottom: 0.5rem; }
+.subtitulo { text-align: center; color: #b5b5b5; }
+
+.tarjeta input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #4a4a4a;
+  background: #1f1f1f;
+  color: inherit;
+  font-size: 1rem;
+}
+.tarjeta input:focus { outline: 2px solid #c89cf7; border-color: transparent; }
+
+.fila { display: flex; gap: 0.6rem; }
+.fila > * { flex: 1; min-width: 0; }
+
+.btn-primario, .btn-secundario {
+  padding: 0.7rem;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.btn-primario { background: #c89cf7; color: #1c1c1c; font-weight: 600; }
+.btn-primario:hover { background: #b580ee; }
+.btn-secundario { background: transparent; color: #b5b5b5; border: 1px solid #4a4a4a; }
+.btn-secundario:hover { background: #333; }
+
+.error { color: #ff8a8a; font-size: 0.9rem; text-align: center; }
+
+/* ---------- Calculadora ---------- */
+.calculadora {
+  width: min(100%, 380px);
+  background: #202020;
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.calc-barra {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.4rem;
+}
+.calc-volver {
+  background: transparent;
+  color: inherit;
+  font-size: 1.3rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 6px;
+}
+.calc-volver:hover { background: #333; }
+
+.calc-display {
+  text-align: right;
+  padding: 1.2rem 0.6rem 1rem;
+  overflow: hidden;
+}
+.calc-historial { color: #9a9a9a; font-size: 0.95rem; min-height: 1.3em; white-space: nowrap; }
+.calc-numero { font-size: 3.2rem; font-weight: 600; white-space: nowrap; }
+.calc-numero.mediano { font-size: 2.3rem; }
+.calc-numero.chico { font-size: 1.7rem; }
+
+.calc-teclas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+
+.tecla {
+  aspect-ratio: 1.45;
+  border-radius: 5px;
+  font-size: 1.15rem;
+  color: inherit;
+  transition: background 0.1s;
+}
+.tecla:active { transform: scale(0.97); }
+.tecla-num { background: #3b3b3b; font-weight: 600; }
+.tecla-num:hover { background: #454545; }
+.tecla-fn, .tecla-op { background: #323232; }
+.tecla-fn:hover, .tecla-op:hover { background: #3d3d3d; }
+.tecla-op { font-size: 1.4rem; }
+.tecla-igual { background: #c89cf7; color: #1c1c1c; font-size: 1.5rem; }
+.tecla-igual:hover { background: #b580ee; }
