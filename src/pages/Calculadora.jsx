@@ -33,7 +33,8 @@ const ATAJOS = {
   '%': (s) => calc.unaria(s, 'porcentaje'),
 }
 
-export default function Calculadora() {
+// mostrarVolver: muestra la flecha para regresar al menú (cuando existe el menú)
+export default function Calculadora({ mostrarVolver = true }) {
   const [estado, setEstado] = useState(calc.estadoInicial)
   const navigate = useNavigate()
 
@@ -57,7 +58,9 @@ export default function Calculadora() {
     <main className="pantalla">
       <section className="calculadora">
         <header className="calc-barra">
-          <button className="calc-volver" onClick={() => navigate('/menu')} aria-label="Volver al menú">←</button>
+          {mostrarVolver && (
+            <button className="calc-volver" onClick={() => navigate('/menu')} aria-label="Volver al menú">←</button>
+          )}
           <span>Estándar</span>
         </header>
 
