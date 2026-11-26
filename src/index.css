@@ -57,6 +57,52 @@ button { font: inherit; cursor: pointer; border: none; }
 .btn-secundario:hover { background: #333; }
 
 .error { color: #ff8a8a; font-size: 0.9rem; text-align: center; }
+.error:empty { display: none; }
+
+/* ---------- Sum ---------- */
+.tarjeta.sum { padding: 0.5rem 1.2rem 1.5rem; }
+.tarjeta.sum .calc-barra { margin: 0 -0.7rem 0.4rem; }
+
+.sum-fields {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.field span { font-size: 0.85rem; color: #b5b5b5; }
+.field input { font-size: 1.2rem; text-align: right; }
+.field input[aria-invalid='true'] { border-color: #ff8a8a; }
+
+.sum-sign {
+  font-size: 1.6rem;
+  color: #c89cf7;
+  line-height: 1;
+  padding-bottom: 0.65rem;
+}
+
+.sum-result {
+  background: #1f1f1f;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  text-align: right;
+  overflow: hidden;
+}
+.sum-label { display: block; text-align: left; font-size: 0.85rem; color: #b5b5b5; }
+.sum-total { display: block; font-size: 2.6rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sum-total.small { font-size: 1.7rem; }
+
+.sum-history { border-top: 1px solid #3a3a3a; padding-top: 0.8rem; }
+.sum-history h2 { font-size: 0.85rem; font-weight: 600; color: #b5b5b5; margin-bottom: 0.4rem; }
+.sum-history ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.sum-history li { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.95rem; color: #d0d0d0; }
+.sum-history li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Hide the spinner arrows on number inputs */
+.field input::-webkit-outer-spin-button,
+.field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.field input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
 
 /* ---------- Calculadora ---------- */
 .calculadora {
