@@ -1,23 +1,24 @@
 import { useNavigate } from 'react-router-dom'
 
-export default function Menu({ usuario, onLogout }) {
+export default function Menu({ user, onLogout }) {
   const navigate = useNavigate()
 
-  const salir = () => {
+  const signOut = () => {
     onLogout()
     navigate('/')
   }
 
   return (
-    <main className="pantalla">
-      <section className="tarjeta">
-        <h1>Hola, {usuario}</h1>
-        <p className="subtitulo">Elige una aplicación</p>
-        <button className="btn-primario" onClick={() => navigate('/suma')}>SUM</button>
-        <button className="btn-primario" onClick={() => navigate('/calculadora')}>Calculator</button>
-        <button className="btn-primario" onClick={() => navigate('/api')}>API · Rick y Morty</button>
-        <button className="btn-secundario" onClick={salir}>Cerrar sesión</button>
-      </section>
-    </main>
+    <div className="page">
+      <div className="box">
+        <h1>Hello, {user}</h1>
+        <p>Choose an app:</p>
+        <button onClick={() => navigate('/sum')}>SUM</button>
+        <button onClick={() => navigate('/calculator')}>Calculator</button>
+        <button onClick={() => navigate('/form')}>Form</button>
+        <button onClick={() => navigate('/characters')}>Rick and Morty</button>
+        <button className="light-button" onClick={signOut}>Sign out</button>
+      </div>
+    </div>
   )
 }
