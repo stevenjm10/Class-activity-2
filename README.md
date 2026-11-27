@@ -1,23 +1,31 @@
 # Class-activity-2
 
-Actividad en clase de Programación Web en **React**: calculadora estándar tipo móvil.
+Web Programming class activity in **React**: calculator.
 
-> Esta rama contiene solo la calculadora. El login, el menú y la aplicación de suma se desarrollan en la rama `dev`.
+> This branch contains only the calculator. Login, menu and the sum app are developed on the `dev` branch.
 
-## Calculadora
+## Calculator
 
-- Teclas: `%`, `CE`, `C`, `⌫`, `1/x`, `x²`, `√x`, `÷ × − +`, `+/−`, `.`, `=`
-- Encadena operaciones (`1 + 2 × 4 =` → 12) y evita errores de coma flotante (`0.1 + 0.2` → 0.3)
-- Muestra error al dividir entre 0 o sacar raíz de un negativo
-- También funciona con el teclado: números, `+ - * /`, `Enter`, `Backspace`, `Esc`
+Layout based on the class sketch:
 
-Archivos: `src/pages/Calculadora.jsx` (interfaz) y `src/logic/calculadora.js` (lógica).
+```
+[Reset] [ - ] [ x ] [DEL]
+[  7  ] [ 8 ] [ 9 ] [ / ]
+[  4  ] [ 5 ] [ 6 ] [ + ]
+[  1  ] [ 2 ] [ 3 ] [   ]
+[ 00  ] [ 0 ] [ . ] [ = ]
+```
 
-## Ejecutar
+- Chains operations (`1 + 2 x 4 =` → 12)
+- Shows `Error` when dividing by 0
+
+File: `src/pages/Calculator.jsx`.
+
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abrir la URL que muestra la terminal (por defecto http://localhost:5173).
+Open the URL shown in the terminal (http://localhost:5173 by default).
