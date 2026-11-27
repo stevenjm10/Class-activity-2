@@ -15,6 +15,7 @@ export default function Menu({ usuario, onLogout }) {
         <p className="subtitulo">Elige una aplicación</p>
         <button className="btn-primario" onClick={() => navigate('/suma')}>SUM</button>
         <button className="btn-primario" onClick={() => navigate('/calculadora')}>Calculator</button>
+        <button className="btn-primario" onClick={() => navigate('/api')}>API · Rick y Morty</button>
         <button className="btn-secundario" onClick={salir}>Cerrar sesión</button>
       </section>
     </main>
