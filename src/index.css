@@ -13,6 +13,7 @@
   --secondary: #ddd;
   --secondary-hover: #cfcfcf;
   --error: red;
+  --success: green;
 }
 
 body {
@@ -300,17 +301,17 @@ button {
 
 .form-field > label {
   font-size: 14px;
-  color: #444;
+  color: var(--text-muted);
 }
 
 .box select,
 .box textarea {
   padding: 8px;
-  border: 1px solid #aaa;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
   font-family: inherit;
   font-size: 15px;
-  background-color: white;
+  background-color: var(--surface);
 }
 
 .box textarea {
@@ -323,14 +324,14 @@ button {
   flex-wrap: wrap;
   gap: 4px 12px;
   margin: 0;
-  border: 1px solid #aaa;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
   padding: 6px 10px 8px;
 }
 
 .form-options legend {
   font-size: 14px;
-  color: #444;
+  color: var(--text-muted);
   padding: 0 4px;
 }
 
@@ -344,11 +345,11 @@ button {
 
 .box .form-check input {
   padding: 0;
-  accent-color: #2f6fb3;
+  accent-color: var(--primary);
 }
 
 .form-error {
-  color: red;
+  color: var(--error);
   font-size: 13px;
   margin: 0;
 }
@@ -357,7 +358,7 @@ button {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  color: #777;
+  color: var(--text-muted);
 }
 
 .form-actions {
@@ -383,7 +384,7 @@ button {
 }
 
 .form-success-title {
-  color: green;
+  color: var(--success);
   font-weight: bold;
   text-align: center;
   margin: 0;
@@ -395,11 +396,11 @@ button {
   gap: 6px 14px;
   margin: 0;
   padding: 12px;
-  background-color: #f4f6f8;
+  background-color: var(--surface-soft);
   border-radius: 4px;
 }
 
-.form-summary dt { color: #555; }
+.form-summary dt { color: var(--text-muted); }
 .form-summary dd { margin: 0; overflow-wrap: anywhere; }
 
 @media (max-width: 600px) {
