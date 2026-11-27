@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 const STATUS = { Alive: 'Alive', Dead: 'Dead', unknown: 'Unknown' }
 
@@ -100,7 +99,7 @@ function Results({ name, page, onPageChange }) {
 }
 
 // Rick and Morty character search (https://rickandmortyapi.com)
-export default function Characters() {
+export default function Characters({ onBack }) {
   const [text, setText] = useState('')
   const [query, setQuery] = useState({ name: '', page: 1 })
 
@@ -114,7 +113,7 @@ export default function Characters() {
 
   return (
     <main className="rm-page">
-      <Link className="rm-back" to="/menu">← Back to menu</Link>
+      <button type="button" className="rm-back" onClick={onBack}>← Back to menu</button>
       <h1>Rick and Morty characters</h1>
       <label className="rm-search">
         Search by name

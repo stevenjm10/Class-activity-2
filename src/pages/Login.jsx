@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const navigate = useNavigate()
 
   const signIn = (e) => {
     e.preventDefault()
@@ -14,7 +12,6 @@ export default function Login({ onLogin }) {
       return
     }
     onLogin(username.trim())
-    navigate('/menu')
   }
 
   return (

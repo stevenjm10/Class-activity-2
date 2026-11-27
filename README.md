@@ -13,6 +13,10 @@ Login (Username, Password, Button)
         └── Rick and Morty → Character search (Rick and Morty API)
 ```
 
+## Navigation
+
+The app does not use a router. Navigation is simulated in `src/App.jsx`: the current screen is kept in React state, and each page gets callbacks (`onOpen`, `onBack`, `onLogout`) to change it.
+
 ## Project structure
 
 | Part | Files |

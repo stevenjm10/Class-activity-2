@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 // Does the math for the selected operator
 function calculate(a, b, operator) {
@@ -16,12 +15,11 @@ function round(value) {
   return String(parseFloat(value.toFixed(10)))
 }
 
-export default function Calculator({ showBack = true }) {
+export default function Calculator({ onBack }) {
   const [display, setDisplay] = useState('0')
   const [firstNumber, setFirstNumber] = useState(null)
   const [operator, setOperator] = useState(null)
   const [newNumber, setNewNumber] = useState(false)
-  const navigate = useNavigate()
 
   const pressNumber = (num) => {
     if (display === 'Error' || newNumber) {
@@ -81,8 +79,8 @@ export default function Calculator({ showBack = true }) {
   return (
     <div className="page">
       <div className="calculator">
-        {showBack && (
-          <button className="back-button" onClick={() => navigate('/menu')}>Back</button>
+        {onBack && (
+          <button className="back-button" onClick={onBack}>Back</button>
         )}
 
         <div className="display">

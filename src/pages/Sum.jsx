@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const MAX_HISTORY = 3
 
@@ -7,14 +6,13 @@ const MAX_HISTORY = 3
 const format = (n) => String(parseFloat(n.toPrecision(12)))
 
 // Two-number sum app
-export default function Sum() {
+export default function Sum({ onBack }) {
   const [num1, setNum1] = useState('')
   const [num2, setNum2] = useState('')
   const [result, setResult] = useState(null) // { a, b, total }
   const [error, setError] = useState('')
   const [history, setHistory] = useState([])
   const firstInput = useRef(null)
-  const navigate = useNavigate()
 
   const add = (e) => {
     e.preventDefault()
@@ -107,7 +105,7 @@ export default function Sum() {
           </div>
         )}
 
-        <button type="button" className="light-button" onClick={() => navigate('/menu')}>← Back to menu</button>
+        <button type="button" className="light-button" onClick={onBack}>← Back to menu</button>
       </form>
     </div>
   )

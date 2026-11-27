@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
 import { ACCOUNT_TYPES, SUBJECTS, defaultValues, formSchema } from '../schemas/formSchema.js'
 
 // Form view: radio, checkbox, password, text input, select and textarea,
 // validated with React Hook Form + Zod.
-export default function Form() {
-  const navigate = useNavigate()
+export default function Form({ onBack }) {
   const [submitted, setSubmitted] = useState(null)
 
   const {
@@ -112,7 +110,7 @@ export default function Form() {
           </form>
         )}
 
-        <button className="light-button" onClick={() => navigate('/menu')}>← Back to menu</button>
+        <button className="light-button" onClick={onBack}>← Back to menu</button>
       </div>
     </div>
   )

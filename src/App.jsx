@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 import Menu from './pages/Menu.jsx'
 import Sum from './pages/Sum.jsx'
@@ -7,22 +6,31 @@ import Calculator from './pages/Calculator.jsx'
 import Form from './pages/Form.jsx'
 import Characters from './pages/Characters.jsx'
 
+// Simulated navigation (no router): the current screen is kept in state.
 // Flow: Login -> Menu -> (Sum | Calculator | Form | Characters)
+const SCREENS = { sum: Sum, calculator: Calculator, form: Form, characters: Characters }
+
 export default function App() {
   const [user, setUser] = useState(null)
+  const [screen, setScreen] = useState('menu')
 
-  // Without a signed-in user, protected routes go back to the login screen
-  const protect = (element) => (user ? element : <Navigate to="/" replace />)
+  const signIn = (name) => {
+    setUser(name)
+    setScreen('menu')
+  }
 
-  return (
-    <Routes>
-      <Route path="/" element={<Login onLogin={setUser} />} />
-      <Route path="/menu" element={protect(<Menu user={user} onLogout={() => setUser(null)} />)} />
-      <Route path="/sum" element={protect(<Sum />)} />
-      <Route path="/calculator" element={protect(<Calculator />)} />
-      <Route path="/form" element={protect(<Form />)} />
-      <Route path="/characters" element={protect(<Characters />)} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  )
+  const signOut = () => {
+    setUser(null)
+    setScreen('menu')
+  }
+
+  const backToMenu = () => setScreen('menu')
+
+  // Without a signed-in user, only the login screen is shown
+  if (!user) return <Login onLogin={signIn} />
+
+  const Screen = SCREENS[screen]
+  if (Screen) return <Screen onBack={backToMenu} />
+
+  return <Menu user={user} onOpen={setScreen} onLogout={signOut} />
 }

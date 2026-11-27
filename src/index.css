@@ -419,7 +419,12 @@ button {
 }
 
 .rm-back {
+  padding: 0;
+  border: none;
+  background: none;
   color: var(--primary);
+  font: inherit;
+  text-decoration: underline;
 }
 
 .rm-page h1 {
