@@ -1,7 +1,26 @@
+/* Shared color palette: every page uses these, so colors stay the same everywhere */
+:root {
+  --background: #e9eef3;
+  --surface: white;
+  --surface-soft: #f4f7fa;
+  --border: #ccc;
+  --input-border: #aaa;
+  --text: black;
+  --text-muted: #555;
+  --primary: #2f6fb3;
+  --primary-hover: #245a93;
+  --on-primary: white;
+  --secondary: #ddd;
+  --secondary-hover: #cfcfcf;
+  --error: red;
+  --success: green;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #e9eef3;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 button {
@@ -19,8 +38,8 @@ button {
 /* Login, menu and sum boxes */
 .box {
   width: 300px;
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 25px;
   display: flex;
@@ -35,7 +54,7 @@ button {
 
 .box input {
   padding: 8px;
-  border: 1px solid #aaa;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
   font-size: 15px;
 }
@@ -44,18 +63,22 @@ button {
   padding: 9px;
   border: none;
   border-radius: 4px;
-  background-color: #2f6fb3;
-  color: white;
+  background-color: var(--primary);
+  color: var(--on-primary);
   font-size: 15px;
 }
 
 .box button:hover {
-  background-color: #245a93;
+  background-color: var(--primary-hover);
 }
 
 .box .light-button {
-  background-color: #ddd;
-  color: black;
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+.box .light-button:hover {
+  background-color: var(--secondary-hover);
 }
 
 .row {
@@ -70,28 +93,113 @@ button {
 }
 
 .error {
-  color: red;
+  color: var(--error);
   text-align: center;
   margin: 0;
 }
 
-/* Calculator */
+/* Sum */
+.sum-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.field input {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.field input[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.plus-sign {
+  padding-bottom: 7px;
+  font-size: 22px;
+  color: var(--primary);
+}
+
+.sum-result {
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 10px;
+  text-align: right;
+  overflow: hidden;
+}
+
+.sum-result small {
+  display: block;
+  color: var(--text-muted);
+}
+
+.sum-result output {
+  display: block;
+  font-size: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sum-history {
+  border-top: 1px solid var(--secondary);
+  padding-top: 8px;
+}
+
+.sum-history h2 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.sum-history ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sum-history li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+/* Calculator: same card, colors and buttons as the other pages */
 .calculator {
   width: 280px;
-  background-color: #333;
-  border-radius: 10px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   padding: 15px;
 }
 
 .back-button {
   margin-bottom: 10px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border: none;
   border-radius: 4px;
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+.back-button:hover {
+  background-color: var(--secondary-hover);
 }
 
 .display {
-  background-color: #cfe3c8;
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border);
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 15px;
@@ -104,7 +212,7 @@ button {
 }
 
 .display small {
-  color: #555;
+  color: var(--text-muted);
   height: 16px;
 }
 
@@ -120,29 +228,375 @@ button {
 
 .buttons button {
   height: 50px;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: var(--surface-soft);
+  color: var(--text);
   font-size: 18px;
 }
 
-.buttons button:active {
-  background-color: #bbb;
+.buttons button:hover {
+  background-color: var(--secondary);
 }
 
-.buttons .gray {
-  background-color: #a5a5a5;
+/* Reset and DEL */
+.buttons .action {
+  background-color: var(--secondary);
 }
 
-.buttons .orange {
-  background-color: #f0a030;
-  color: white;
+.buttons .action:hover {
+  background-color: var(--secondary-hover);
+}
+
+/* Operators */
+.buttons .operator {
+  border-color: var(--primary);
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.buttons .operator:hover,
+.buttons .equals:hover {
+  background-color: var(--primary-hover);
 }
 
 /* The = button takes two rows */
 .buttons .equals {
   grid-row: span 2;
   height: auto;
-  background-color: #2f6fb3;
-  color: white;
+  border-color: var(--primary-hover);
+  background-color: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+/* Form (React Hook Form + Zod) */
+.box.form-box {
+  width: 560px;
+  max-width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'options password'
+    'name    comments'
+    'subject comments'
+    'actions actions';
+  gap: 12px 16px;
+}
+
+.area-options { grid-area: options; }
+.area-password { grid-area: password; }
+.area-name { grid-area: name; }
+.area-subject { grid-area: subject; }
+.area-comments { grid-area: comments; }
+.area-comments textarea { flex: 1; }
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field > label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.box select,
+.box textarea {
+  padding: 8px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 15px;
+  background-color: var(--surface);
+}
+
+.box textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  padding: 6px 10px 8px;
+}
+
+.form-options legend {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.box .form-check input {
+  padding: 0;
+  accent-color: var(--primary);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 13px;
+  margin: 0;
+}
+
+.form-hint {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.form-actions {
+  grid-area: actions;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.form-actions button {
+  min-width: 100px;
+}
+
+.box button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.form-success {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-success-title {
+  color: var(--success);
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.form-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 12px;
+  background-color: var(--surface-soft);
+  border-radius: 4px;
+}
+
+.form-summary dt { color: var(--text-muted); }
+.form-summary dd { margin: 0; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'options' 'password' 'name' 'subject' 'comments' 'actions';
+  }
+}
+
+/* Characters (Rick and Morty API) */
+.rm-page {
+  width: min(100%, 68rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  box-sizing: border-box;
+}
+
+.rm-back {
+  color: var(--primary);
+}
+
+.rm-page h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin: 1.4rem 0;
+}
+
+.rm-search {
+  display: grid;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.rm-search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: normal;
+}
+
+.rm-page :focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.rm-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-size: 15px;
+}
+
+.rm-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.rm-button.light {
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+.rm-button.light:hover {
+  background-color: var(--secondary-hover);
+}
+
+.rm-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.rm-controls,
+.rm-controls nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rm-controls {
+  justify-content: space-between;
+  margin: 20px 0;
+  color: var(--text-muted);
+}
+
+.rm-notice {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 2rem 0;
+}
+
+.rm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 16px;
+}
+
+.rm-character {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.rm-character:hover {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.rm-character img,
+.rm-detail img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.rm-card {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+}
+
+.rm-card strong {
+  font-size: 1.1rem;
+}
+
+.rm-card span,
+.rm-detail dt {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.rm-detail {
+  margin: auto;
+  width: min(92vw, 38rem);
+  max-height: 88vh;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+.rm-detail::backdrop {
+  background: rgb(0 0 0 / 50%);
+}
+
+.rm-detail-body {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 20px;
+}
+
+.rm-detail img {
+  border-radius: 5px;
+}
+
+.rm-detail h2 {
+  margin: 0;
+}
+
+.rm-detail dl {
+  margin: 12px 0 18px;
+}
+
+.rm-detail dt {
+  margin-top: 8px;
+}
+
+.rm-detail dd {
+  margin: 0;
+}
+
+@media (max-width: 32rem) {
+  .rm-detail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .rm-detail img {
+    max-width: 9rem;
+  }
 }
