@@ -1,118 +1,148 @@
-* { box-sizing: border-box; margin: 0; }
-
-:root {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  color: #f3f3f3;
-  background: #1c1c1c;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e9eef3;
 }
 
-body { min-height: 100vh; }
+button {
+  cursor: pointer;
+}
 
-button { font: inherit; cursor: pointer; border: none; }
-
-/* ---------- Pantallas generales (login, menú, suma) ---------- */
-.pantalla {
+/* Centers every screen */
+.page {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.tarjeta {
-  width: min(100%, 360px);
-  background: #2b2b2b;
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
+/* Login, menu and sum boxes */
+.box {
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  gap: 10px;
 }
 
-.tarjeta h1 { font-size: 1.5rem; text-align: center; margin-bottom: 0.5rem; }
-.subtitulo { text-align: center; color: #b5b5b5; }
-
-.tarjeta input {
-  width: 100%;
-  padding: 0.7rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #4a4a4a;
-  background: #1f1f1f;
-  color: inherit;
-  font-size: 1rem;
-}
-.tarjeta input:focus { outline: 2px solid #c89cf7; border-color: transparent; }
-
-.fila { display: flex; gap: 0.6rem; }
-.fila > * { flex: 1; min-width: 0; }
-
-.btn-primario, .btn-secundario {
-  padding: 0.7rem;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-.btn-primario { background: #c89cf7; color: #1c1c1c; font-weight: 600; }
-.btn-primario:hover { background: #b580ee; }
-.btn-secundario { background: transparent; color: #b5b5b5; border: 1px solid #4a4a4a; }
-.btn-secundario:hover { background: #333; }
-
-.error { color: #ff8a8a; font-size: 0.9rem; text-align: center; }
-
-/* ---------- Calculadora ---------- */
-.calculadora {
-  width: min(100%, 380px);
-  background: #202020;
-  border-radius: 12px;
-  padding: 0.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+.box h1 {
+  text-align: center;
+  margin: 0 0 10px;
 }
 
-.calc-barra {
+.box input {
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.box button {
+  padding: 9px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2f6fb3;
+  color: white;
+  font-size: 15px;
+}
+
+.box button:hover {
+  background-color: #245a93;
+}
+
+.box .light-button {
+  background-color: #ddd;
+  color: black;
+}
+
+.row {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding: 0.4rem;
+  gap: 8px;
 }
-.calc-volver {
-  background: transparent;
-  color: inherit;
-  font-size: 1.3rem;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 6px;
-}
-.calc-volver:hover { background: #333; }
 
-.calc-display {
+.row input,
+.row button {
+  flex: 1;
+  min-width: 0;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 0;
+}
+
+/* Calculator */
+.calculator {
+  width: 280px;
+  background-color: #333;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.back-button {
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.display {
+  background-color: #cfe3c8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
   text-align: right;
-  padding: 1.2rem 0.6rem 1rem;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
 }
-.calc-historial { color: #9a9a9a; font-size: 0.95rem; min-height: 1.3em; white-space: nowrap; }
-.calc-numero { font-size: 3.2rem; font-weight: 600; white-space: nowrap; }
-.calc-numero.mediano { font-size: 2.3rem; }
-.calc-numero.chico { font-size: 1.7rem; }
 
-.calc-teclas {
+.display small {
+  color: #555;
+  height: 16px;
+}
+
+.display span {
+  font-size: 28px;
+}
+
+.buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
+  gap: 8px;
 }
 
-.tecla {
-  aspect-ratio: 1.45;
+.buttons button {
+  height: 50px;
+  border: none;
   border-radius: 5px;
-  font-size: 1.15rem;
-  color: inherit;
-  transition: background 0.1s;
+  background-color: #f2f2f2;
+  font-size: 18px;
 }
-.tecla:active { transform: scale(0.97); }
-.tecla-num { background: #3b3b3b; font-weight: 600; }
-.tecla-num:hover { background: #454545; }
-.tecla-fn, .tecla-op { background: #323232; }
-.tecla-fn:hover, .tecla-op:hover { background: #3d3d3d; }
-.tecla-op { font-size: 1.4rem; }
-.tecla-igual { background: #c89cf7; color: #1c1c1c; font-size: 1.5rem; }
-.tecla-igual:hover { background: #b580ee; }
+
+.buttons button:active {
+  background-color: #bbb;
+}
+
+.buttons .gray {
+  background-color: #a5a5a5;
+}
+
+.buttons .orange {
+  background-color: #f0a030;
+  color: white;
+}
+
+/* The = button takes two rows */
+.buttons .equals {
+  grid-row: span 2;
+  height: auto;
+  background-color: #2f6fb3;
+  color: white;
+}
