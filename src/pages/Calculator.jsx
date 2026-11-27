@@ -91,20 +91,20 @@ export default function Calculator({ showBack = true }) {
         </div>
 
         <div className="buttons">
-          <button className="gray" onClick={reset}>Reset</button>
-          <button className="orange" onClick={() => pressOperator('-')}>-</button>
-          <button className="orange" onClick={() => pressOperator('x')}>x</button>
-          <button className="gray" onClick={deleteLast}>DEL</button>
+          <button className="action" onClick={reset}>Reset</button>
+          <button className="operator" onClick={() => pressOperator('-')}>-</button>
+          <button className="operator" onClick={() => pressOperator('x')}>x</button>
+          <button className="action" onClick={deleteLast}>DEL</button>
 
           <button onClick={() => pressNumber('7')}>7</button>
           <button onClick={() => pressNumber('8')}>8</button>
           <button onClick={() => pressNumber('9')}>9</button>
-          <button className="orange" onClick={() => pressOperator('/')}>/</button>
+          <button className="operator" onClick={() => pressOperator('/')}>/</button>
 
           <button onClick={() => pressNumber('4')}>4</button>
           <button onClick={() => pressNumber('5')}>5</button>
           <button onClick={() => pressNumber('6')}>6</button>
-          <button className="orange" onClick={() => pressOperator('+')}>+</button>
+          <button className="operator" onClick={() => pressOperator('+')}>+</button>
 
           <button onClick={() => pressNumber('1')}>1</button>
           <button onClick={() => pressNumber('2')}>2</button>
