@@ -1,85 +1,65 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Card from '../components/Card.jsx'
+import Field from '../components/Field.jsx'
+import Button from '../components/Button.jsx'
+import BackButton from '../components/BackButton.jsx'
+import { sumDefaults, sumSchema } from '../schemas/sumSchema.js'
+import { formatNumber } from '../utils/formatNumber.js'
 
 const MAX_HISTORY = 3
 
-// Rounds away floating point noise, so 0.1 + 0.2 shows 0.3
-const format = (n) => String(parseFloat(n.toPrecision(12)))
-
-// Two-number sum app
+// Page 1 - Sum: adds two numbers and keeps the last few results
 export default function Sum({ onBack }) {
-  const [num1, setNum1] = useState('')
-  const [num2, setNum2] = useState('')
   const [result, setResult] = useState(null) // { a, b, total }
-  const [error, setError] = useState('')
   const [history, setHistory] = useState([])
-  const firstInput = useRef(null)
 
-  const add = (e) => {
-    e.preventDefault()
-    if (num1 === '' || num2 === '') {
-      setError('Enter both numbers')
-      return
-    }
-    const a = Number(num1)
-    const b = Number(num2)
-    const entry = { a: format(a), b: format(b), total: format(a + b) }
-    setError('')
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setFocus,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(sumSchema), defaultValues: sumDefaults })
+
+  // Zod already turned num1 and num2 into numbers
+  const add = ({ num1, num2 }) => {
+    const entry = { a: formatNumber(num1), b: formatNumber(num2), total: formatNumber(num1 + num2) }
     setResult(entry)
-    setHistory((h) => [entry, ...h].slice(0, MAX_HISTORY))
+    setHistory((previous) => [entry, ...previous].slice(0, MAX_HISTORY))
   }
 
   const clear = () => {
-    setNum1('')
-    setNum2('')
+    reset()
     setResult(null)
-    setError('')
-    firstInput.current?.focus()
+    // Wait for the reset to be drawn, then put the cursor back in the first input
+    setTimeout(() => setFocus('num1'))
   }
 
-  // Typing hides the error message
-  const handleChange = (setter) => (e) => {
-    setter(e.target.value)
-    if (error) setError('')
-  }
-
-  const isMissing = (value) => Boolean(error) && value === ''
+  // Both inputs are the same, only the name and label change
+  const numberInput = (name, label) => (
+    <Field id={name} label={label} error={errors[name]?.message}>
+      <input
+        id={name}
+        type="number"
+        inputMode="decimal"
+        step="any"
+        placeholder="0"
+        aria-invalid={Boolean(errors[name])}
+        {...register(name)}
+      />
+    </Field>
+  )
 
   return (
-    <div className="page">
-      <form className="box" onSubmit={add} noValidate>
-        <h1>Sum</h1>
-
+    <Card title="Sum">
+      <form className="stack" onSubmit={handleSubmit(add)} noValidate>
         <div className="sum-inputs">
-          <label className="field">
-            Number 1
-            <input
-              ref={firstInput}
-              type="number"
-              inputMode="decimal"
-              step="any"
-              placeholder="0"
-              value={num1}
-              onChange={handleChange(setNum1)}
-              aria-invalid={isMissing(num1)}
-              autoFocus
-            />
-          </label>
+          {numberInput('num1', 'Number 1')}
           <span className="plus-sign" aria-hidden="true">+</span>
-          <label className="field">
-            Number 2
-            <input
-              type="number"
-              inputMode="decimal"
-              step="any"
-              placeholder="0"
-              value={num2}
-              onChange={handleChange(setNum2)}
-              aria-invalid={isMissing(num2)}
-            />
-          </label>
+          {numberInput('num2', 'Number 2')}
         </div>
-
-        {error && <p className="error" role="alert">{error}</p>}
 
         <div className="sum-result" aria-live="polite">
           <small>{result ? `${result.a} + ${result.b} =` : 'Result'}</small>
@@ -87,26 +67,26 @@ export default function Sum({ onBack }) {
         </div>
 
         <div className="row">
-          <button type="button" className="light-button" onClick={clear}>Clear</button>
-          <button type="submit">Add</button>
+          <Button variant="light" onClick={clear}>Clear</Button>
+          <Button type="submit">Add</Button>
         </div>
-
-        {history.length > 0 && (
-          <div className="sum-history">
-            <h2>Recent sums</h2>
-            <ul>
-              {history.map((h, i) => (
-                <li key={i}>
-                  <span>{h.a} + {h.b}</span>
-                  <strong>{h.total}</strong>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <button type="button" className="light-button" onClick={onBack}>← Back to menu</button>
       </form>
-    </div>
+
+      {history.length > 0 && (
+        <div className="sum-history">
+          <h2>Recent sums</h2>
+          <ul>
+            {history.map((entry, index) => (
+              <li key={index}>
+                <span>{entry.a} + {entry.b}</span>
+                <strong>{entry.total}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <BackButton onClick={onBack} />
+    </Card>
   )
 }

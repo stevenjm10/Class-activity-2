@@ -2,8 +2,9 @@ import { z } from 'zod'
 
 export const ACCOUNT_TYPES = ['Student', 'Teacher', 'Guest']
 export const SUBJECTS = ['Web Programming', 'Databases', 'Software Engineering', 'Networks']
+export const COMMENTS_MAX = 300
 
-// Validation rules for the Form view (used by React Hook Form through zodResolver)
+// Validation rules for the Form page (used by React Hook Form through zodResolver)
 export const formSchema = z.object({
   accountType: z.enum(ACCOUNT_TYPES, { error: 'Choose an account type' }),
   acceptTerms: z.literal(true, { error: 'You must accept the terms' }),
@@ -22,7 +23,7 @@ export const formSchema = z.object({
     .string()
     .trim()
     .min(10, { error: 'At least 10 characters' })
-    .max(300, { error: 'At most 300 characters' }),
+    .max(COMMENTS_MAX, { error: `At most ${COMMENTS_MAX} characters` }),
 })
 
 export const defaultValues = {
