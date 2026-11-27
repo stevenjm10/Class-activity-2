@@ -1,11 +1,15 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { formatear as formatNumber } from '../logic/calculadora.js'
 
 const MAX_HISTORY = 3
 
+// Rounds the number so 0.1 + 0.2 shows 0.3
+function formatNumber(n) {
+  return String(parseFloat(n.toPrecision(12)))
+}
+
 // Adds two numbers and keeps the last few results
-export default function Suma() {
+export default function Sum() {
   const [first, setFirst] = useState('')
   const [second, setSecond] = useState('')
   const [result, setResult] = useState(null) // { a, b, total }
@@ -45,10 +49,10 @@ export default function Suma() {
   const isMissing = (value) => Boolean(error) && value === ''
 
   return (
-    <main className="pantalla">
-      <form className="tarjeta sum" onSubmit={add} noValidate>
-        <header className="calc-barra">
-          <button type="button" className="calc-volver" onClick={() => navigate('/menu')} aria-label="Back to menu">←</button>
+    <div className="page">
+      <form className="box sum" onSubmit={add} noValidate>
+        <header className="sum-header">
+          <button type="button" className="sum-back" onClick={() => navigate('/menu')} aria-label="Back to menu">←</button>
           <span>Sum</span>
         </header>
 
@@ -86,15 +90,15 @@ export default function Suma() {
 
         <div className="sum-result" aria-live="polite">
           <span className="sum-label">Result</span>
-          <div className="calc-historial">{result ? `${result.a} + ${result.b} =` : ' '}</div>
+          <div className="sum-operation">{result ? `${result.a} + ${result.b} =` : ' '}</div>
           <output className={`sum-total ${result?.total.length > 12 ? 'small' : ''}`}>
             {result ? result.total : '0'}
           </output>
         </div>
 
-        <div className="fila">
-          <button type="button" className="btn-secundario" onClick={clear}>Clear</button>
-          <button type="submit" className="btn-primario">Add</button>
+        <div className="row">
+          <button type="button" className="light-button" onClick={clear}>Clear</button>
+          <button type="submit">Add</button>
         </div>
 
         {history.length > 0 && (
@@ -111,6 +115,6 @@ export default function Suma() {
           </section>
         )}
       </form>
-    </main>
+    </div>
   )
 }
