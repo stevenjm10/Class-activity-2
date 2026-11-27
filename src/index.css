@@ -13,6 +13,7 @@
   --secondary: #ddd;
   --secondary-hover: #cfcfcf;
   --error: red;
+  --success: green;
 }
 
 body {
@@ -266,4 +267,336 @@ button {
   border-color: var(--primary-hover);
   background-color: var(--primary-hover);
   color: var(--on-primary);
+}
+
+/* Form (React Hook Form + Zod) */
+.box.form-box {
+  width: 560px;
+  max-width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'options password'
+    'name    comments'
+    'subject comments'
+    'actions actions';
+  gap: 12px 16px;
+}
+
+.area-options { grid-area: options; }
+.area-password { grid-area: password; }
+.area-name { grid-area: name; }
+.area-subject { grid-area: subject; }
+.area-comments { grid-area: comments; }
+.area-comments textarea { flex: 1; }
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field > label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.box select,
+.box textarea {
+  padding: 8px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 15px;
+  background-color: var(--surface);
+}
+
+.box textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  padding: 6px 10px 8px;
+}
+
+.form-options legend {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.box .form-check input {
+  padding: 0;
+  accent-color: var(--primary);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 13px;
+  margin: 0;
+}
+
+.form-hint {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.form-actions {
+  grid-area: actions;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.form-actions button {
+  min-width: 100px;
+}
+
+.box button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.form-success {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-success-title {
+  color: var(--success);
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.form-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 12px;
+  background-color: var(--surface-soft);
+  border-radius: 4px;
+}
+
+.form-summary dt { color: var(--text-muted); }
+.form-summary dd { margin: 0; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'options' 'password' 'name' 'subject' 'comments' 'actions';
+  }
+}
+
+/* Characters (Rick and Morty API) */
+.rm-page {
+  width: min(100%, 68rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  box-sizing: border-box;
+}
+
+.rm-back {
+  color: var(--primary);
+}
+
+.rm-page h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin: 1.4rem 0;
+}
+
+.rm-search {
+  display: grid;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.rm-search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: normal;
+}
+
+.rm-page :focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.rm-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-size: 15px;
+}
+
+.rm-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.rm-button.light {
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+.rm-button.light:hover {
+  background-color: var(--secondary-hover);
+}
+
+.rm-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.rm-controls,
+.rm-controls nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rm-controls {
+  justify-content: space-between;
+  margin: 20px 0;
+  color: var(--text-muted);
+}
+
+.rm-notice {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 2rem 0;
+}
+
+.rm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 16px;
+}
+
+.rm-character {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.rm-character:hover {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.rm-character img,
+.rm-detail img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.rm-card {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+}
+
+.rm-card strong {
+  font-size: 1.1rem;
+}
+
+.rm-card span,
+.rm-detail dt {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.rm-detail {
+  margin: auto;
+  width: min(92vw, 38rem);
+  max-height: 88vh;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+.rm-detail::backdrop {
+  background: rgb(0 0 0 / 50%);
+}
+
+.rm-detail-body {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 20px;
+}
+
+.rm-detail img {
+  border-radius: 5px;
+}
+
+.rm-detail h2 {
+  margin: 0;
+}
+
+.rm-detail dl {
+  margin: 12px 0 18px;
+}
+
+.rm-detail dt {
+  margin-top: 8px;
+}
+
+.rm-detail dd {
+  margin: 0;
+}
+
+@media (max-width: 32rem) {
+  .rm-detail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .rm-detail img {
+    max-width: 9rem;
+  }
 }

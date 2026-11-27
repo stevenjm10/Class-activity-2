@@ -15,6 +15,8 @@ export default function Menu({ user, onLogout }) {
         <p>Choose an app:</p>
         <button onClick={() => navigate('/sum')}>SUM</button>
         <button onClick={() => navigate('/calculator')}>Calculator</button>
+        <button onClick={() => navigate('/form')}>Form</button>
+        <button onClick={() => navigate('/characters')}>Rick and Morty</button>
         <button className="light-button" onClick={signOut}>Sign out</button>
       </div>
     </div>
