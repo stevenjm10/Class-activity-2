@@ -1,4 +1,7 @@
-/* Shared color palette: every page uses these, so colors stay the same everywhere */
+/* ==========================================================================
+   1. Color palette
+   Every page uses these variables, so colors are defined only once.
+   ========================================================================== */
 :root {
   --background: #e9eef3;
   --surface: white;
@@ -16,6 +19,9 @@
   --success: green;
 }
 
+/* ==========================================================================
+   2. Base elements
+   ========================================================================== */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -25,9 +31,47 @@ body {
 
 button {
   cursor: pointer;
+  font: inherit;
 }
 
-/* Centers every screen */
+input:not([type='radio'], [type='checkbox']),
+select,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  accent-color: var(--primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* ==========================================================================
+   3. Shared layout and components (src/components)
+   ========================================================================== */
+
+/* Card.jsx: centers the screen and draws the white card */
 .page {
   min-height: 100vh;
   display: flex;
@@ -35,9 +79,10 @@ button {
   align-items: center;
 }
 
-/* Login, menu and sum boxes */
-.box {
+.card {
   width: 300px;
+  max-width: 100%;
+  box-sizing: border-box;
   background-color: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -47,86 +92,102 @@ button {
   gap: 10px;
 }
 
-.box h1 {
+.card-wide {
+  width: 560px;
+}
+
+.card h1 {
   text-align: center;
   margin: 0 0 10px;
 }
 
-.box input {
-  padding: 8px;
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  font-size: 15px;
+/* Vertical list with the same spacing as the card (used by forms) */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.box button {
-  padding: 9px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--primary);
-  color: var(--on-primary);
-  font-size: 15px;
-}
-
-.box button:hover {
-  background-color: var(--primary-hover);
-}
-
-.box .light-button {
-  background-color: var(--secondary);
-  color: var(--text);
-}
-
-.box .light-button:hover {
-  background-color: var(--secondary-hover);
-}
-
+/* Items side by side with the same width */
 .row {
   display: flex;
   gap: 8px;
 }
 
-.row input,
-.row button {
+.row > * {
   flex: 1;
   min-width: 0;
 }
 
-.error {
-  color: var(--error);
-  text-align: center;
-  margin: 0;
+/* Button.jsx: primary (blue) and light (gray) */
+.btn {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
 }
 
-/* Sum */
-.sum-inputs {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
 }
 
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-light {
+  background-color: var(--secondary);
+  color: var(--text);
+}
+
+.btn-light:hover {
+  background-color: var(--secondary-hover);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Field.jsx: label + control + error */
 .field {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 13px;
+  gap: 5px;
+}
+
+.field > label {
+  font-size: 14px;
   color: var(--text-muted);
 }
 
-.field input {
-  width: 100%;
-  box-sizing: border-box;
+/* ErrorMessage.jsx */
+.error {
+  color: var(--error);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ==========================================================================
+   4. Pages (src/pages)
+   ========================================================================== */
+
+/* ---------- Sum ---------- */
+.sum-inputs {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.sum-inputs input {
   text-align: right;
 }
 
-.field input[aria-invalid='true'] {
-  border-color: var(--error);
-}
-
 .plus-sign {
-  padding-bottom: 7px;
+  padding-top: 28px;
   font-size: 22px;
   color: var(--primary);
 }
@@ -175,7 +236,7 @@ button {
   font-size: 14px;
 }
 
-/* Calculator: same card, colors and buttons as the other pages */
+/* ---------- Calculator ---------- */
 .calculator {
   width: 280px;
   background-color: var(--surface);
@@ -184,17 +245,8 @@ button {
   padding: 15px;
 }
 
-.back-button {
+.calculator-back {
   margin-bottom: 10px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--secondary);
-  color: var(--text);
-}
-
-.back-button:hover {
-  background-color: var(--secondary-hover);
 }
 
 .display {
@@ -220,13 +272,13 @@ button {
   font-size: 28px;
 }
 
-.buttons {
+.keys {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
 
-.buttons button {
+.key {
   height: 50px;
   border: 1px solid var(--border);
   border-radius: 5px;
@@ -235,33 +287,28 @@ button {
   font-size: 18px;
 }
 
-.buttons button:hover {
+.key:hover {
   background-color: var(--secondary);
 }
 
 /* Reset and DEL */
-.buttons .action {
+.key-action {
   background-color: var(--secondary);
 }
 
-.buttons .action:hover {
+.key-action:hover {
   background-color: var(--secondary-hover);
 }
 
-/* Operators */
-.buttons .operator {
+/* + - x / */
+.key-operator {
   border-color: var(--primary);
   background-color: var(--primary);
   color: var(--on-primary);
 }
 
-.buttons .operator:hover,
-.buttons .equals:hover {
-  background-color: var(--primary-hover);
-}
-
-/* The = button takes two rows */
-.buttons .equals {
+/* = is darker and takes two rows */
+.key-equals {
   grid-row: span 2;
   height: auto;
   border-color: var(--primary-hover);
@@ -269,12 +316,12 @@ button {
   color: var(--on-primary);
 }
 
-/* Form (React Hook Form + Zod) */
-.box.form-box {
-  width: 560px;
-  max-width: 100%;
+.key-operator:hover,
+.key-equals:hover {
+  background-color: var(--primary-hover);
 }
 
+/* ---------- Form ---------- */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -292,32 +339,6 @@ button {
 .area-subject { grid-area: subject; }
 .area-comments { grid-area: comments; }
 .area-comments textarea { flex: 1; }
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.form-field > label {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-.box select,
-.box textarea {
-  padding: 8px;
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 15px;
-  background-color: var(--surface);
-}
-
-.box textarea {
-  resize: vertical;
-  min-height: 80px;
-}
 
 .form-options {
   display: flex;
@@ -343,20 +364,8 @@ button {
   cursor: pointer;
 }
 
-.box .form-check input {
-  padding: 0;
-  accent-color: var(--primary);
-}
-
-.form-error {
-  color: var(--error);
-  font-size: 13px;
-  margin: 0;
-}
-
-.form-hint {
-  display: flex;
-  justify-content: space-between;
+.counter {
+  align-self: flex-end;
   font-size: 13px;
   color: var(--text-muted);
 }
@@ -368,22 +377,11 @@ button {
   gap: 8px;
 }
 
-.form-actions button {
+.form-actions .btn {
   min-width: 100px;
 }
 
-.box button:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
 .form-success {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.form-success-title {
   color: var(--success);
   font-weight: bold;
   text-align: center;
@@ -392,12 +390,17 @@ button {
 
 .form-summary {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 6px 14px;
+  gap: 6px;
   margin: 0;
   padding: 12px;
   background-color: var(--surface-soft);
   border-radius: 4px;
+}
+
+.form-summary-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px;
 }
 
 .form-summary dt { color: var(--text-muted); }
@@ -410,16 +413,12 @@ button {
   }
 }
 
-/* Characters (Rick and Morty API) */
+/* ---------- Rick and Morty characters ---------- */
 .rm-page {
   width: min(100%, 68rem);
   margin: 0 auto;
   padding: clamp(1rem, 4vw, 3rem);
   box-sizing: border-box;
-}
-
-.rm-back {
-  color: var(--primary);
 }
 
 .rm-page h1 {
@@ -434,51 +433,11 @@ button {
 }
 
 .rm-search input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px 12px;
-  border: 1px solid var(--input-border);
-  border-radius: 4px;
-  background-color: var(--surface);
-  color: var(--text);
-  font: inherit;
   font-weight: normal;
 }
 
-.rm-page :focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 2px;
-}
-
-.rm-button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--primary);
-  color: var(--on-primary);
-  font-size: 15px;
-}
-
-.rm-button:hover {
-  background-color: var(--primary-hover);
-}
-
-.rm-button.light {
-  background-color: var(--secondary);
-  color: var(--text);
-}
-
-.rm-button.light:hover {
-  background-color: var(--secondary-hover);
-}
-
-.rm-button:disabled {
-  opacity: 0.45;
-  cursor: default;
-}
-
 .rm-controls,
-.rm-controls nav {
+.rm-pagination {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -519,7 +478,6 @@ button {
   border-radius: 8px;
   background-color: var(--surface);
   color: var(--text);
-  font: inherit;
 }
 
 .rm-character:hover {
