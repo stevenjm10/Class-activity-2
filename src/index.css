@@ -1,164 +1,269 @@
-* { box-sizing: border-box; margin: 0; }
-
-:root {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  color: #f3f3f3;
-  background: #1c1c1c;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e9eef3;
 }
 
-body { min-height: 100vh; }
+button {
+  cursor: pointer;
+}
 
-button { font: inherit; cursor: pointer; border: none; }
-
-/* ---------- Pantallas generales (login, menú, suma) ---------- */
-.pantalla {
+/* Centers every screen */
+.page {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.tarjeta {
-  width: min(100%, 360px);
-  background: #2b2b2b;
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
+/* Login, menu and sum boxes */
+.box {
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  gap: 10px;
 }
 
-.tarjeta h1 { font-size: 1.5rem; text-align: center; margin-bottom: 0.5rem; }
-.subtitulo { text-align: center; color: #b5b5b5; }
-
-.tarjeta input {
-  width: 100%;
-  padding: 0.7rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #4a4a4a;
-  background: #1f1f1f;
-  color: inherit;
-  font-size: 1rem;
+.box h1 {
+  text-align: center;
+  margin: 0 0 10px;
 }
-.tarjeta input:focus { outline: 2px solid #c89cf7; border-color: transparent; }
 
-.fila { display: flex; gap: 0.6rem; }
-.fila > * { flex: 1; min-width: 0; }
-
-.btn-primario, .btn-secundario {
-  padding: 0.7rem;
-  border-radius: 6px;
-  font-size: 1rem;
+.box input {
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 15px;
 }
-.btn-primario { background: #c89cf7; color: #1c1c1c; font-weight: 600; }
-.btn-primario:hover { background: #b580ee; }
-.btn-secundario { background: transparent; color: #b5b5b5; border: 1px solid #4a4a4a; }
-.btn-secundario:hover { background: #333; }
 
-.error { color: #ff8a8a; font-size: 0.9rem; text-align: center; }
-.error:empty { display: none; }
+.box button {
+  padding: 9px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2f6fb3;
+  color: white;
+  font-size: 15px;
+}
 
-/* ---------- Sum ---------- */
-.tarjeta.sum { padding: 0.5rem 1.2rem 1.5rem; }
-.tarjeta.sum .calc-barra { margin: 0 -0.7rem 0.4rem; }
+.box button:hover {
+  background-color: #245a93;
+}
+
+.box .light-button {
+  background-color: #ddd;
+  color: black;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.row input,
+.row button {
+  flex: 1;
+  min-width: 0;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 0;
+}
+
+/* Sum */
+.error:empty {
+  display: none;
+}
+
+.sum-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.box .sum-back {
+  padding: 2px 10px;
+  background-color: #ddd;
+  color: black;
+}
 
 .sum-fields {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: end;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
-.field { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
-.field span { font-size: 0.85rem; color: #b5b5b5; }
-.field input { font-size: 1.2rem; text-align: right; }
-.field input[aria-invalid='true'] { border-color: #ff8a8a; }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.field span {
+  font-size: 13px;
+  color: #555;
+}
+
+.field input {
+  text-align: right;
+  min-width: 0;
+}
+
+.field input[aria-invalid='true'] {
+  border-color: red;
+}
 
 .sum-sign {
-  font-size: 1.6rem;
-  color: #c89cf7;
-  line-height: 1;
-  padding-bottom: 0.65rem;
+  font-size: 24px;
+  padding-bottom: 6px;
 }
 
 .sum-result {
-  background: #1f1f1f;
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
   text-align: right;
   overflow: hidden;
 }
-.sum-label { display: block; text-align: left; font-size: 0.85rem; color: #b5b5b5; }
-.sum-total { display: block; font-size: 2.6rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sum-total.small { font-size: 1.7rem; }
 
-.sum-history { border-top: 1px solid #3a3a3a; padding-top: 0.8rem; }
-.sum-history h2 { font-size: 0.85rem; font-weight: 600; color: #b5b5b5; margin-bottom: 0.4rem; }
-.sum-history ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; }
-.sum-history li { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.95rem; color: #d0d0d0; }
-.sum-history li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* Hide the spinner arrows on number inputs */
-.field input::-webkit-outer-spin-button,
-.field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.field input[type='number'] { -moz-appearance: textfield; appearance: textfield; }
-
-/* ---------- Calculadora ---------- */
-.calculadora {
-  width: min(100%, 380px);
-  background: #202020;
-  border-radius: 12px;
-  padding: 0.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+.sum-label {
+  display: block;
+  text-align: left;
+  font-size: 13px;
+  color: #555;
 }
 
-.calc-barra {
+.sum-operation {
+  color: #777;
+  font-size: 13px;
+  min-height: 16px;
+}
+
+.sum-total {
+  display: block;
+  font-size: 32px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sum-total.small {
+  font-size: 22px;
+}
+
+.sum-history {
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+}
+
+.sum-history h2 {
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+.sum-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sum-history li {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding: 0.4rem;
+  justify-content: space-between;
+  font-size: 14px;
 }
-.calc-volver {
-  background: transparent;
-  color: inherit;
-  font-size: 1.3rem;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 6px;
-}
-.calc-volver:hover { background: #333; }
 
-.calc-display {
+/* Hides the arrows on number inputs */
+.field input::-webkit-outer-spin-button,
+.field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.field input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Calculator */
+.calculator {
+  width: 280px;
+  background-color: #333;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.back-button {
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.display {
+  background-color: #cfe3c8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
   text-align: right;
-  padding: 1.2rem 0.6rem 1rem;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
 }
-.calc-historial { color: #9a9a9a; font-size: 0.95rem; min-height: 1.3em; white-space: nowrap; }
-.calc-numero { font-size: 3.2rem; font-weight: 600; white-space: nowrap; }
-.calc-numero.mediano { font-size: 2.3rem; }
-.calc-numero.chico { font-size: 1.7rem; }
 
-.calc-teclas {
+.display small {
+  color: #555;
+  height: 16px;
+}
+
+.display span {
+  font-size: 28px;
+}
+
+.buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
+  gap: 8px;
 }
 
-.tecla {
-  aspect-ratio: 1.45;
+.buttons button {
+  height: 50px;
+  border: none;
   border-radius: 5px;
-  font-size: 1.15rem;
-  color: inherit;
-  transition: background 0.1s;
+  background-color: #f2f2f2;
+  font-size: 18px;
 }
-.tecla:active { transform: scale(0.97); }
-.tecla-num { background: #3b3b3b; font-weight: 600; }
-.tecla-num:hover { background: #454545; }
-.tecla-fn, .tecla-op { background: #323232; }
-.tecla-fn:hover, .tecla-op:hover { background: #3d3d3d; }
-.tecla-op { font-size: 1.4rem; }
-.tecla-igual { background: #c89cf7; color: #1c1c1c; font-size: 1.5rem; }
-.tecla-igual:hover { background: #b580ee; }
+
+.buttons button:active {
+  background-color: #bbb;
+}
+
+.buttons .gray {
+  background-color: #a5a5a5;
+}
+
+.buttons .orange {
+  background-color: #f0a030;
+  color: white;
+}
+
+/* The = button takes two rows */
+.buttons .equals {
+  grid-row: span 2;
+  height: auto;
+  background-color: #2f6fb3;
+  color: white;
+}
