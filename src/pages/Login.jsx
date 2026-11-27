@@ -7,10 +7,10 @@ export default function Login({ onLogin }) {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const ingresar = (e) => {
+  const signIn = (e) => {
     e.preventDefault()
     if (!username.trim() || !password.trim()) {
-      setError('Ingresa usuario y contraseña')
+      setError('Enter your username and password')
       return
     }
     onLogin(username.trim())
@@ -18,9 +18,9 @@ export default function Login({ onLogin }) {
   }
 
   return (
-    <main className="pantalla">
-      <form className="tarjeta" onSubmit={ingresar}>
-        <h1>Iniciar sesión</h1>
+    <div className="page">
+      <form className="box" onSubmit={signIn}>
+        <h1>Sign in</h1>
         <input
           type="text"
           placeholder="Username"
@@ -36,8 +36,8 @@ export default function Login({ onLogin }) {
           autoComplete="current-password"
         />
         {error && <p className="error">{error}</p>}
-        <button type="submit" className="btn-primario">Ingresar</button>
+        <button type="submit">Sign in</button>
       </form>
-    </main>
+    </div>
   )
 }
