@@ -75,6 +75,83 @@ button {
   margin: 0;
 }
 
+/* Sum */
+.sum-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #555;
+}
+
+.field input {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.field input[aria-invalid='true'] {
+  border-color: red;
+}
+
+.plus-sign {
+  padding-bottom: 7px;
+  font-size: 22px;
+  color: #2f6fb3;
+}
+
+.sum-result {
+  background-color: #f4f7fa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: right;
+  overflow: hidden;
+}
+
+.sum-result small {
+  display: block;
+  color: #555;
+}
+
+.sum-result output {
+  display: block;
+  font-size: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sum-history {
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+}
+
+.sum-history h2 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #555;
+}
+
+.sum-history ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sum-history li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
 /* Calculator */
 .calculator {
   width: 280px;
